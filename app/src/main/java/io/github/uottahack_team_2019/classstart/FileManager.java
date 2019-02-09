@@ -44,18 +44,17 @@ public class FileManager {
         List<String> list = new ArrayList<>();
         try {
             FileInputStream fis = activity.openFileInput(path);
+            if (fis == null) return null;
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader bufferedReader = new BufferedReader(isr);
             String line;
-            try {
-                while ((line = bufferedReader.readLine()) != null) {
-                    list.add(line);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+            while ((line = bufferedReader.readLine()) != null) {
+                list.add(line);
             }
         } catch (FileNotFoundException e) {
             //File not found
+            return null;
+        } catch (IOException e) {
             return null;
         }
         return list;
