@@ -8,14 +8,12 @@ import android.view.WindowManager;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FileManager fileManager;
+    public FileManager fileManager;
     private ClassSort classSort;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
 
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -23,8 +21,6 @@ public class MainActivity extends AppCompatActivity {
 
         fileManager = new FileManager(this);
         classSort = new ClassSort(this);
-
-        setContentView(R.layout.activity_main);
     }
     @TargetApi(21)
     private void setStatusBarColour() {
