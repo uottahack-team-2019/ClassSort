@@ -20,6 +20,6 @@ public class MainActivity extends AppCompatActivity {
     }
     @TargetApi(21)
     private void setStatusBarColour() {
-        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.colourLightGrey));
+        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.colourBlack));
     }
 }
