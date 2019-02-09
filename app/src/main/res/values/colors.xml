@@ -7,4 +7,5 @@
     <color name="colourLightBlue">#CFE2F3</color>
     <color name="colourLightGrey">#EEEEEE</color>
     <color name="colourRed">#FF0000</color>
+    <color name="colourBlack">#000000</color>
 </resources>
