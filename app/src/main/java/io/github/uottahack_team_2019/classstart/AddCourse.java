@@ -39,7 +39,7 @@ public class AddCourse {
             edText1.setInputType(InputType.TYPE_CLASS_TEXT);
 
             String str = edText1.getText().toString();
-            return str;
+            return str ;
         }
     }
 
