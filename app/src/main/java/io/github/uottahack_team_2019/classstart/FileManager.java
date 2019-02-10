@@ -34,8 +34,16 @@ public class FileManager {
     public FileManager(MainActivity activity) {
         this.activity = activity;
         loadCourseCodes();
+
+        courseCodes.add("Hello World");
+        courseCodes.add("Class 1");
+        courseCodes.add("Class 2");
+        courseCodes.add("Class 3");
+        courseCodes.add("Class 4");
+
     }
-    /**Loads the existing courses, adds them to courseCodes*/
+    /**Loads the existing courses, adds
+     *  them to courseCodes*/
     private void loadCourseCodes() {
         List<String> courseCodes = getListFromFile(COURSE_FILE);
         if (courseCodes != null) {
