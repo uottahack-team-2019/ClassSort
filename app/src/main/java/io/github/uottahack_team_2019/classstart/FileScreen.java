@@ -3,8 +3,6 @@ package io.github.uottahack_team_2019.classstart;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,7 +12,14 @@ import java.io.File;
 public class FileScreen {
     public static final int READ_REQUEST_CODE = 42;
 
+    private static MainActivity activity;
+
+    public static String courseCode;
+
     public FileScreen(final MainActivity activity, final String courseCode) {
+        FileScreen.activity = activity;
+        FileScreen.courseCode = courseCode;
+
         activity.setContentView(R.layout.activity_file);
         ((TextView) activity.findViewById(R.id.titleFile)).setText(courseCode + ": Files");
 
@@ -33,7 +38,7 @@ public class FileScreen {
             }
         });
 
-        File[] files = activity.fileManager.getFiles(courseCode);
+        final File[] files = activity.fileManager.getFiles(courseCode);
         if (files != null) {
             Button[] classes = new Button[files.length * 2];
 
@@ -43,7 +48,7 @@ public class FileScreen {
                 classes[i].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        new Course(activity, activity.fileManager.courseCodes.get(courseIndex));
+                        activity.fileManager.openFile(files[courseIndex]);
                     }
                 });
                 classes[i + 1].setOnClickListener(new View.OnClickListener() {
@@ -81,5 +86,8 @@ public class FileScreen {
         ConstraintLayout.LayoutParams l2 = new ConstraintLayout.LayoutParams(200, 200);
         b2.addView(classes[i+1], l2);
 
+    }
+    public static void refresh() {
+        new FileScreen(activity, courseCode);
     }
 }

@@ -3,12 +3,15 @@ package io.github.uottahack_team_2019.classstart;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
+import android.provider.OpenableColumns;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
+import android.webkit.MimeTypeMap;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -16,10 +19,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,27 +94,31 @@ public class FileManager {
             e.printStackTrace();
         }
     }
-    /**Saves the file from the given website*/
-    public void saveFile(String location) {
+    /**Saves the file to the internal storage*/
+    public void saveFile(InputStream in, String courseCode, Uri uri) {
         try {
-            URL url = new URL(location);
-
-            DataInputStream inputStream = new DataInputStream(url.openStream());
-
-            byte[] buffer = new byte[1024];
-            int length;
-
-            String fileName = location.substring(location.lastIndexOf('/') + 1);
-
-            FileOutputStream outputStream = activity.openFileOutput(FILE_FOLDER + "/" + fileName, Context.MODE_PRIVATE);
-            while ((length = inputStream.read(buffer)) > 0) {
-                outputStream.write(buffer, 0, length);
+            File file = new File(activity.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS) + courseCode + "/" + FILE_FOLDER + "/" + getFileName(uri));
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+            OutputStream out = new FileOutputStream(file);
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
             }
-            outputStream.close();
+            out.close();
+            in.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            String sStackTrace = sw.toString(); // stack trace as a string
+
+            Log.d("12345", sStackTrace);
+            //oops
         }
     }
+
     /**Saves the given list of strings to the given path*/
     private void saveList(List<String> list, String path) {
         try {
@@ -134,6 +140,39 @@ public class FileManager {
     }
 
     public File[] getFiles(String courseCode) {
-        return new File(activity.getFilesDir() + courseCode + "/" + NOTES_FOLDER + "/").listFiles();
+        return new File(activity.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS) + courseCode + "/" + FILE_FOLDER + "/").listFiles();
+    }
+    /**Given a Uri, returns the file name*/
+    public String getFileName(Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            Cursor cursor = activity.getContentResolver().query(uri, null, null, null, null);
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        if (result == null) {
+            result = uri.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
+    }
+    public void openFile(File file) {
+        String mime = MimeTypeMap.getSingleton().getMimeTypeFromExtension(".JPG");
+
+        Intent intent = new Intent();
+        intent.setAction(android.content.Intent.ACTION_VIEW);
+        Uri uri = FileProvider.getUriForFile(activity, activity.getApplicationContext().getPackageName() + ".my.package.name.provider", file);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.setDataAndType(uri, mime);
+
+        activity.startActivityForResult(intent, 10);
     }
 }
