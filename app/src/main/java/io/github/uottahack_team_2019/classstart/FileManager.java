@@ -75,7 +75,17 @@ public class FileManager {
     /**Removes the given course, updates the course codes file (assumes the course code exists), and deletes the resources saved with the course*/
     public void removeCourse(String courseCode) {
         courseCodes.remove(courseCode);
-        new File(courseCode).delete();
+        File folderToDelete = new File(activity.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS) + "/" + courseCode);
+        if (folderToDelete.listFiles() != null) {
+            for (File f : folderToDelete.listFiles()) {
+                if (f.listFiles() != null) {
+                    for (File g : f.listFiles()) {
+                        g.delete();
+                    }
+                }
+            }
+        }
+        folderToDelete.delete();
         saveCourseCodes();
     }
     /**Saves the strings in courseCodes to the internal storage*/
@@ -86,7 +96,7 @@ public class FileManager {
     public void openFile(String courseCode, String fileName) {
         try {
             Intent intent = new Intent(Intent.ACTION_VIEW);
-            File file = new File(activity.getFilesDir() + courseCode + "/" + FILE_FOLDER + "/" + fileName);
+            File file = new File(activity.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS) + "/" + courseCode + "/" + FILE_FOLDER + "/" + fileName);
             String extension = android.webkit.MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(file).toString());
             String mimetype = android.webkit.MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
             intent.setDataAndType(Uri.fromFile(file), mimetype);
@@ -98,7 +108,7 @@ public class FileManager {
     /**Saves the file to the internal storage*/
     public void saveFile(InputStream in, String courseCode, Uri uri) {
         try {
-            File file = new File(activity.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS) + courseCode + "/" + FILE_FOLDER + "/" + getFileName(uri));
+            File file = new File(activity.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS) + "/" + courseCode + "/" + FILE_FOLDER + "/" + getFileName(uri));
             file.getParentFile().mkdirs();
             file.createNewFile();
             OutputStream out = new FileOutputStream(file);
@@ -133,7 +143,7 @@ public class FileManager {
         }
     }
     public void saveNote(String courseCode, String noteTitle, String noteContent, String noteFileName) {
-        File file = new File(activity.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS) + courseCode + "/" + NOTES_FOLDER + "/" + noteFileName);
+        File file = new File(activity.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS) + "/" + courseCode + "/" + NOTES_FOLDER + "/" + noteFileName);
         file.getParentFile().mkdirs();
         try {
             file.createNewFile();
@@ -157,10 +167,10 @@ public class FileManager {
         }
     }
     public File[] getNotes(String courseCode) {
-        return new File(activity.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS) + courseCode + "/" + NOTES_FOLDER + "/").listFiles();
+        return new File(activity.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS) + "/" + courseCode + "/" + NOTES_FOLDER + "/").listFiles();
     }
     public File[] getFiles(String courseCode) {
-        return new File(activity.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS) + courseCode + "/" + FILE_FOLDER + "/").listFiles();
+        return new File(activity.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS) + "/" + courseCode + "/" + FILE_FOLDER + "/").listFiles();
     }
     /**Given a Uri, returns the file name*/
     public String getFileName(Uri uri) {
