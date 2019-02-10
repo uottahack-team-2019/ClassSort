@@ -132,4 +132,8 @@ public class FileManager {
     public void saveNote(List<String> note, String courseCode, String noteName) {
         saveList(note, courseCode +  "/" + NOTES_FOLDER + "/" + noteName);
     }
+
+    public File[] getFiles(String courseCode) {
+        return new File(activity.getFilesDir() + courseCode + "/" + NOTES_FOLDER + "/").listFiles();
+    }
 }
