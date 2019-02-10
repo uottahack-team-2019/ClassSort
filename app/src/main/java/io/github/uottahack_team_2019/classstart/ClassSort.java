@@ -55,14 +55,22 @@ public class ClassSort extends AppCompatActivity {
             }
         });
 
-
         Button classes[] = new Button[activity.fileManager.courseCodes.size()*2];
 
         for(int i=0; i<activity.fileManager.courseCodes.size()*2-1; i=i+2)
         {
             Log.d("test123", ""+i);
             makeBtn(activity, classes, i);
+            final int courseIndex = i / 2;
+            classes[i+1].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    activity1.fileManager.removeCourse(activity1.fileManager.courseCodes.get(courseIndex));
+                }
+            });
         }
+
+
     }
 
 
