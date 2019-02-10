@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -131,8 +132,29 @@ public class FileManager {
             e.printStackTrace();
         }
     }
-    public void saveNote(List<String> note, String courseCode, String noteName) {
-        saveList(note, courseCode +  "/" + NOTES_FOLDER + "/" + noteName);
+    public void saveNote(String courseCode, String noteTitle, String noteContent, String noteFileName) {
+        File file = new File(activity.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS) + courseCode + "/" + NOTES_FOLDER + "/" + noteFileName);
+        file.getParentFile().mkdirs();
+        try {
+            file.createNewFile();
+            OutputStream out = new FileOutputStream(file);
+            out.write((noteTitle + System.getProperty("line.separator")).getBytes());
+            out.write(noteContent.getBytes());
+            out.close();
+        } catch (IOException e) {
+            //guess i'll die
+        }
+    }
+    public void openNote(File noteFile, String courseCode) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(noteFile));
+            String[] note = new String[] {reader.readLine(), reader.readLine(), noteFile.getName()};
+            reader.close();
+            new Note(activity, courseCode, note);
+
+        } catch (IOException e) {
+            //hope this doesnt happen during the demo
+        }
     }
     public File[] getNotes(String courseCode) {
         return new File(activity.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS) + courseCode + "/" + NOTES_FOLDER + "/").listFiles();
