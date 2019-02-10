@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ClassStart</string>
+    <string name="app_name">ClassSort</string>
     <string name="notes">Notes</string>
     <string name="files">Files</string>
     <string name="reminders">Reminders</string>
