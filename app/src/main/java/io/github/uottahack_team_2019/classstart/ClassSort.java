@@ -34,6 +34,7 @@ public class ClassSort extends AppCompatActivity {
 
         activity1 = activity;
         Button addCrs = (Button) findViewById(R.id.addCrs);
+
         addCrs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
