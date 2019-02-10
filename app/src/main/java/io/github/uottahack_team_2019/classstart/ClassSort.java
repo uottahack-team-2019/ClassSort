@@ -61,6 +61,12 @@ public class ClassSort extends AppCompatActivity {
         {
             makeBtn(activity, classes, i);
             final int courseIndex = i / 2;
+            classes[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new Course(activity1, activity1.fileManager.courseCodes.get(courseIndex));
+                }
+            });
             classes[i+1].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
