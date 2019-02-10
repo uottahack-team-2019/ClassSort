@@ -131,14 +131,12 @@ public class FileManager {
             e.printStackTrace();
         }
     }
-    /**Returns the given note as a list of strings (the bullet points)*/
-    public List<String> getNote(String courseCode, String noteName) {
-        return getListFromFile(courseCode + "/" + NOTES_FOLDER + "/" + noteName);
-    }
     public void saveNote(List<String> note, String courseCode, String noteName) {
         saveList(note, courseCode +  "/" + NOTES_FOLDER + "/" + noteName);
     }
-
+    public File[] getNotes(String courseCode) {
+        return new File(activity.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS) + courseCode + "/" + NOTES_FOLDER + "/").listFiles();
+    }
     public File[] getFiles(String courseCode) {
         return new File(activity.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS) + courseCode + "/" + FILE_FOLDER + "/").listFiles();
     }
