@@ -19,7 +19,6 @@ import android.view.WindowManager;
 import java.io.FileNotFoundException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,13 +36,13 @@ public class MainActivity extends AppCompatActivity {
         setStatusBarColour();
 
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        executor.schedule(new Runnable() {
+        /*executor.schedule(new Runnable() {
             @Override
             public void run() {
                 showNotification("Test","notification");
 
             }
-        }, 9, TimeUnit.SECONDS);
+        }, 9, TimeUnit.SECONDS);*/
 
         fileManager = new FileManager(this);
         classSort = new ClassSort(this);

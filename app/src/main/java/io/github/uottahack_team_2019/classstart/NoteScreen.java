@@ -23,12 +23,12 @@ public class NoteScreen {
         activity.setContentView(R.layout.activity_note);
         ((TextView) activity.findViewById(R.id.titleNote)).setText(courseCode + ": Notes");
 
-        Button addFile = (Button) activity.findViewById(R.id.addFile);
+        Button addNote = (Button) activity.findViewById(R.id.addNote);
 
-        addFile.setOnClickListener(new View.OnClickListener() {
+        addNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Note(activity, courseCode);
+                new Note(activity, courseCode, new String[] {"", "", (int) (Math.random() * 10000000f) + ""});
             }
         });
 
@@ -48,7 +48,7 @@ public class NoteScreen {
                     classes[i].setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            activity.fileManager.openFile(files[courseIndex]);
+                            activity.fileManager.openNote(files[courseIndex], courseCode);
                         }
                     });
                     classes[i + 1].setOnClickListener(new View.OnClickListener() {
@@ -72,7 +72,7 @@ public class NoteScreen {
         classes[i].setText(name);
 
 
-        ConstraintLayout b1 = (ConstraintLayout)activity.findViewById(R.id.fileID);
+        ConstraintLayout b1 = (ConstraintLayout)activity.findViewById(R.id.noteID);
         ConstraintLayout.LayoutParams l1 = new ConstraintLayout.LayoutParams(800, 200);
         b1.addView(classes[i], l1);
 
@@ -85,7 +85,7 @@ public class NoteScreen {
         classes[i+1].setText("X");
         classes[i+1].setTextColor(Color.RED);
 
-        ConstraintLayout b2 = (ConstraintLayout)activity.findViewById(R.id.fileID);
+        ConstraintLayout b2 = (ConstraintLayout)activity.findViewById(R.id.noteID);
         ConstraintLayout.LayoutParams l2 = new ConstraintLayout.LayoutParams(200, 200);
         b2.addView(classes[i+1], l2);
 
