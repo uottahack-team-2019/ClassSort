@@ -35,12 +35,6 @@ public class FileManager {
         this.activity = activity;
         loadCourseCodes();
 
-        courseCodes.add("Hello World");
-        courseCodes.add("Class 1");
-        courseCodes.add("Class 2");
-        courseCodes.add("Class 3");
-        courseCodes.add("Class 4");
-
     }
     /**Loads the existing courses, adds
      *  them to courseCodes*/
@@ -124,7 +118,7 @@ public class FileManager {
         try {
             FileOutputStream outputStream = activity.openFileOutput(path, Context.MODE_PRIVATE);
             for (String code: list) {
-                outputStream.write(code.getBytes());
+                outputStream.write((code + System.getProperty("line.separator")).getBytes());
             }
             outputStream.close();
         } catch (Exception e) {
