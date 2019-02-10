@@ -8,8 +8,8 @@ import android.view.WindowManager;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FileManager fileManager;
-    private ClassSort classSort;
+    public FileManager fileManager;
+    public ClassSort classSort;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
