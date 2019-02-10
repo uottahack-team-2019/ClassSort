@@ -9,7 +9,9 @@ import android.view.WindowManager;
 public class MainActivity extends AppCompatActivity {
 
     public FileManager fileManager;
-    public ClassSort classSort;
+
+    private ClassSort classSort;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
         fileManager = new FileManager(this);
         classSort = new ClassSort(this);
-
-        setContentView(R.layout.activity_main);
     }
     @TargetApi(21)
     private void setStatusBarColour() {
