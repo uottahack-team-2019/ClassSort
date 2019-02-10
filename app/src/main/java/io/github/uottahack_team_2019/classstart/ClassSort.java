@@ -33,7 +33,7 @@ public class ClassSort extends AppCompatActivity {
         activity.setContentView(R.layout.activity_class_sort);
 
         activity1 = activity;
-        Button addCrs = (Button) findViewById(R.id.addCrs);
+        Button addCrs = (Button) activity.findViewById(R.id.addCrs);
 
         addCrs.setOnClickListener(new View.OnClickListener() {
             @Override
