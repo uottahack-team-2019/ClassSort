@@ -21,7 +21,7 @@ public class AddCourse extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         cName = (EditText) findViewById(R.id.enterCourse);
-                        Log.d("test", "test");
+                        Log.d("test ", "test");
                         String courseName= cName.getText().toString();
 
 
