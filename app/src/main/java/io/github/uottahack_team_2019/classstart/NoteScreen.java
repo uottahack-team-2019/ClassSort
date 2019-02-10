@@ -4,6 +4,7 @@ import android.widget.TextView;
 
 public class NoteScreen {
     public NoteScreen(MainActivity activity, String courseCode) {
-        ((TextView) activity.findViewById(R.id.courseTitle)).setText(courseCode + ": Screen");
+        activity.setContentView(R.layout.activity_note);
+        ((TextView) activity.findViewById(R.id.titleNote)).setText(courseCode + ": Screen");
     }
 }

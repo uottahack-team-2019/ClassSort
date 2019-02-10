@@ -1,5 +1,6 @@
 package io.github.uottahack_team_2019.classstart;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
