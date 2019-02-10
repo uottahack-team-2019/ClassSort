@@ -10,6 +10,7 @@ import android.widget.Button;
 
 public class ClassSort extends AppCompatActivity {
 
+    private static MainActivity activity1;
 
     public void makeBtn(MainActivity activity, Button classes[], int i) {
 
@@ -40,8 +41,6 @@ public class ClassSort extends AppCompatActivity {
         b2.addView(classes[i+1], l2);
 
     }
-
-    private static MainActivity activity1;
 
     public ClassSort(MainActivity activity) {
         activity.setContentView(R.layout.activity_class_sort);
