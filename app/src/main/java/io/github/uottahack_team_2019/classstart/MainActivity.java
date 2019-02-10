@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 
+import java.io.FileNotFoundException;
+
 public class MainActivity extends AppCompatActivity {
 
     public FileManager fileManager;
@@ -67,9 +69,14 @@ public class MainActivity extends AppCompatActivity {
             // Pull that URI using resultData.getData().
             Uri uri = null;
             if (resultData != null) {
-                uri = resultData.getData();
-                //Log.i(TAG, "Uri: " + uri.toString());
-                showImage(uri);
+                try {
+                    uri = resultData.getData();
+                    fileManager.saveFile(getContentResolver().openInputStream(uri), FileScreen.courseCode, uri);
+                    Log.d("12345", "saved file");
+                    FileScreen.refresh();
+                } catch (FileNotFoundException e) {
+                    //oops
+                }
             }
         }
     }
