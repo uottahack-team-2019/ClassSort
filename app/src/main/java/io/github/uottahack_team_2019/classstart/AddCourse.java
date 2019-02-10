@@ -13,7 +13,6 @@ public class AddCourse {
 
     public AddCourse(final MainActivity activity) {
         activity.setContentView(R.layout.activity_addcourse);
-
         b = activity.findViewById(R.id.adder);
 
         b.setOnClickListener(new View.OnClickListener() {
