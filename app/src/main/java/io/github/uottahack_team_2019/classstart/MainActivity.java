@@ -9,7 +9,9 @@ import android.view.WindowManager;
 public class MainActivity extends AppCompatActivity {
 
     public FileManager fileManager;
+
     private ClassSort classSort;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
