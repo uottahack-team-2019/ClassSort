@@ -2,7 +2,9 @@ package io.github.uottahack_team_2019.classstart;
 
 import android.graphics.Color;
 import android.support.annotation.ColorInt;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -12,18 +14,30 @@ public class ClassSort extends AppCompatActivity {
     public void makeBtn(MainActivity activity, Button classes[], int i) {
 
 
-        classes[i].setX(32);
-        classes[i].setY(200 + 80*i);
-        classes[i].setWidth(250);
-        classes[i].setHeight(80);
-        classes[i].setText(activity.fileManager.courseCodes.get(i));
+        classes[i] = new Button(activity);
 
-        classes[i+1].setX(314);
-        classes[i+1].setY(200 + 80*i);
-        classes[i+1].setWidth(80);
-        classes[i+1].setHeight(80);
+
+        classes[i].setX(32);
+        classes[i].setY(450 + 125*i);
+        classes[i].setText(activity.fileManager.courseCodes.get(i/2));
+
+
+        ConstraintLayout b1 = (ConstraintLayout)activity.findViewById(R.id.classSortID);
+        ConstraintLayout.LayoutParams l1 = new ConstraintLayout.LayoutParams(800, 200);
+        b1.addView(classes[i], l1);
+
+
+
+        classes[i+1] = new Button(activity);
+
+        classes[i+1].setX(850);
+        classes[i+1].setY(450 + 125*i);
         classes[i+1].setText("X");
         classes[i+1].setTextColor(Color.RED);
+
+        ConstraintLayout b2 = (ConstraintLayout)activity.findViewById(R.id.classSortID);
+        ConstraintLayout.LayoutParams l2 = new ConstraintLayout.LayoutParams(200, 200);
+        b2.addView(classes[i+1], l2);
 
     }
 
@@ -42,10 +56,12 @@ public class ClassSort extends AppCompatActivity {
             }
         });
 
-        Button classes[] = new Button[activity.fileManager.courseCodes.size()];
 
-        for(int i=0; i<activity.fileManager.courseCodes.size()-1; i=i+2)
+        Button classes[] = new Button[activity.fileManager.courseCodes.size()*2];
+
+        for(int i=0; i<activity.fileManager.courseCodes.size()*2-1; i=i+2)
         {
+            Log.d("test123", ""+i);
             makeBtn(activity, classes, i);
         }
     }
