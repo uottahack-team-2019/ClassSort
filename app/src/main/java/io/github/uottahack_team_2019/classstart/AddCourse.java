@@ -7,61 +7,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class AddCourse extends AppCompatActivity {
+public class AddCourse {
     Button b;
     EditText cName;
 
-    public void onCreate(Bundle savedInstanceState) {
+    public AddCourse(final MainActivity activity) {
+        activity.setContentView(R.layout.activity_addcourse);
 
-                super.onCreate(savedInstanceState);
-                setContentView(R.layout.activity_addcourse);
-                b = (Button) findViewById(R.id.adder);
+        b = activity.findViewById(R.id.adder);
 
-                b.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        cName = (EditText) findViewById(R.id.enterCourse);
-                        Log.d("test ", "test");
-                        String courseName= cName.getText().toString();
-
-
-                    }
-                });
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cName = (EditText) activity.findViewById(R.id.enterCourse);
+                String courseName= cName.getText().toString();
+                activity.fileManager.addCourse(courseName);
+                new ClassSort(activity);
             }
-
-
-
-
-
-
-              /*  public boolean onKey(View v, int keyCode, KeyEvent event)
-        {
-            if (event.getAction() == KeyEvent.ACTION_DOWN)
-            {
-                switch (keyCode)
-                {
-                    //case KeyEvent.KEYCODE_DPAD_CENTER:
-                    case KeyEvent.KEYCODE_ENTER:
-                        String str = writeText();
-                        System.out.println("test");
-                        return true;
-                    default:
-                        break;
-                }
-            }
-            return false;
-        }*/
-
-        /*public String writeText(){
-            EditText edText1 = (EditText) activity.findViewById(R.id.enterCourse);
-
-            edText1.setInputType(InputType.TYPE_CLASS_TEXT);
-
-            String str = edText1.getText().toString();
-            return str ;
-        }*/
+        });
     }
-
-
+}
 
 
