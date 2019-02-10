@@ -13,6 +13,7 @@ import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 
@@ -23,6 +24,7 @@ import java.util.concurrent.ScheduledExecutorService;
 public class MainActivity extends AppCompatActivity {
 
     public FileManager fileManager;
+    public ScheduledExecutorService executor;
 
     private ClassSort classSort;
 
@@ -35,14 +37,7 @@ public class MainActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         setStatusBarColour();
 
-        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        /*executor.schedule(new Runnable() {
-            @Override
-            public void run() {
-                showNotification("Test","notification");
-
-            }
-        }, 9, TimeUnit.SECONDS);*/
+        executor = Executors.newScheduledThreadPool(1);
 
         fileManager = new FileManager(this);
         classSort = new ClassSort(this);
@@ -95,18 +90,18 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
     void showNotification(String title, String content) {
+        Log.d("12345", "SHOWING NOTIFICATION");
         NotificationManager mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel("default",
-                    "YOUR_CHANNEL_NAME",
+            NotificationChannel channel = new NotificationChannel("ClassSort",
+                    "ClassSort",
                     NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setDescription("YOUR_NOTIFICATION_CHANNEL_DISCRIPTION");
+            channel.setDescription("YOUR_NOTIFICATION_CHANNEL_DESCRIPTION");
             mNotificationManager.createNotificationChannel(channel);
         }
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "default")
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "ClassSort")
                 .setSmallIcon(R.mipmap.ic_launcher) // notification icon
                 .setContentTitle(title) // title for notification
                 .setContentText(content)// message for notification
