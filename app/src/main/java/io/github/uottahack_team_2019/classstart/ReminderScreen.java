@@ -1,6 +1,5 @@
 package io.github.uottahack_team_2019.classstart;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,16 +15,13 @@ public class ReminderScreen {
             @Override
             public void onClick(View v) {
                 try {
-                    final int time = Integer.parseInt(((EditText) (activity.findViewById(R.id.reminderTimeInput))).getText().toString());
+                    final int time = Integer.parseInt(((EditText) activity.findViewById(R.id.reminderTimeInput)).getText().toString());
+                    final EditText editText = ((EditText) activity.findViewById(R.id.reminderInput));
                     activity.executor.schedule(new Runnable() {
                         @Override
                         public void run() {
-                            Log.d("12345", "showing notification "+time);
                             try {
-                                EditText editText = (EditText) activity.findViewById(R.id.reminderMessageInput);
-                                Log.d("12345", ""+editText);
                                 String message = editText.getText().toString();
-                                Log.d("12345", "passed the message");
                                 activity.showNotification("ClassSort", message);
                             }catch(Exception e) {e.printStackTrace();};
                         }
