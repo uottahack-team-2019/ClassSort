@@ -54,7 +54,7 @@ public class FileScreen {
                 classes[i + 1].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        activity.fileManager.removeCourse(activity.fileManager.courseCodes.get(courseIndex));
+                        files[courseIndex].delete();
                         new FileScreen(activity, courseCode);
                     }
                 });
