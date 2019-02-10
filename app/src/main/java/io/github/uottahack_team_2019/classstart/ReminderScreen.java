@@ -22,8 +22,8 @@ public class ReminderScreen {
                         public void run() {
                             Log.d("12345", "showing notification "+time);
                             try {
-                                EditText editText = ((EditText) activity.findViewById(R.id.reminderMessageInput));
-                                Log.d("12345", "passed first message");
+                                EditText editText = (EditText) activity.findViewById(R.id.reminderMessageInput);
+                                Log.d("12345", ""+editText);
                                 String message = editText.getText().toString();
                                 Log.d("12345", "passed the message");
                                 activity.showNotification("ClassSort", message);
