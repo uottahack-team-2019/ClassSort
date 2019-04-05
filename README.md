@@ -1,4 +1,4 @@
-ClassSort - uOttaHack 2019
+# ClassSort - uOttaHack 2019
 
 Names:
 Alois Clerc, Chris Vettese, Krishna Dube, Jason You
