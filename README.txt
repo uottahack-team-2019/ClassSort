@@ -1,4 +1,4 @@
-uOttaHack 2019 (ClassSort)
+#ClassSort - uOttaHack 2019
 Names:
 Jason You
 Alois Clerc
