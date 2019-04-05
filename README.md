@@ -1,10 +1,7 @@
 ClassSort - uOttaHack 2019
 
 Names:
-Jason You
-Alois Clerc
-Chris Vettese
-Krishna Dube
+Alois Clerc, Chris Vettese, Krishna Dube, Jason You
 
 In university, staying organized can be time consuming. With five or more courses filled with assignments, essays, and tests, it is easy to fall behind and lose track of important information, such as an assignment due date. ClassSort provides a comprehensive solution to staying on top of university courses in the form of an Android app. It has three main features which can save students time and makes university easier to manage:
 
