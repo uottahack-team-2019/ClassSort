@@ -8,3 +8,6 @@ In university, staying organized can be time consuming. With five or more course
 1) Note taking - Important details such as TA office hours for each course can be saved in the ClassSort app. Notes, and the other features, are all sorted by course.
 2) File managing - Files such as assignment PDFs, lecture notes, and practice exams can be saved to the app. This means no more searching for old returned assignments, or not having lecture notes when they're needed. Files are stored offline, so an internet connection is not required.
 3) Reminders - Never forget when an assignment is due, or when you're meeting the professor with easy to set reminders. Reminders display as a notification on the user's phone.
+
+![Main Page](/home/aloisclerc/HomePage.png)
+Format: ![Alt Text](url)
